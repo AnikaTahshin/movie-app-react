@@ -6,11 +6,15 @@ import searchIcon from "./assests/icon.svg"
 
 
 function App() {
+
+
+
   let [movies, setMovies] = useState([]);
   let [searchtxt, setSearchTxt] = useState("Pokemon");
   useEffect(() => {
+  getMovies(searchtxt);
 
-  });
+  },[]);
 
   async function getMovies(title) {
     let response = await axios.get("https://www.omdbapi.com/?apikey=c5db1501&s=" + title);
@@ -23,7 +27,9 @@ function App() {
     <div className="app">
       <h1>Movie Land {searchtxt}</h1>
       <div className="search">
-        <input type="search" placeholder="Search For Movies" value={searchtxt} onChange={(e) => { setSearchTxt(e.target.value) }} />&ensp;
+        <input type="search" placeholder="Search For Movies" value={searchtxt} onChange={(e) => {
+          console.log(e);
+          setSearchTxt(e.target.value) }} />&ensp;
         {/* <button onClick={() => { getMovies(searchtxt) }}>Search</button> */}
         <img src={searchIcon} alt={searchIcon} onClick={() => { getMovies(searchtxt) }} />
       </div>
