@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
+import searchIcon from "./assests/icon.svg"
 
 
 
@@ -23,7 +24,8 @@ function App() {
       <h1>Movie Land {searchtxt}</h1>
       <div className="search">
         <input type="search" placeholder="Search For Movies" value={searchtxt} onChange={(e) => { setSearchTxt(e.target.value) }} />&ensp;
-        <button onClick={() => { getMovies(searchtxt) }}>Search</button>
+        {/* <button onClick={() => { getMovies(searchtxt) }}>Search</button> */}
+        <img src={searchIcon} alt={searchIcon} onClick={() => { getMovies(searchtxt) }} />
       </div>
 
       <div className="container">
