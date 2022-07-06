@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import "./App.css";
+
+
 
 function App() {
+  let [movies, setMovies] = useState([]);
+  let [searchtxt, setSearchTxt] = useState("Pokemon");
+  useEffect(() => {
+
+  });
+
+  async function getMovies(title) {
+    let response = await axios.get("https://www.omdbapi.com/?apikey=c5db1501&s=" + title);
+    //console.log(response.data.Search);
+    let data = response.data.Search;
+    setMovies(data);
+    console.log(movies);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Movie Land {searchtxt}</h1>
+      <div className="search">
+        <input type="search" placeholder="Search For Movies" value={searchtxt} onChange={(e) => { setSearchTxt(e.target.value) }} />&ensp;
+        <button onClick={() => { getMovies(searchtxt) }}>Search</button>
+      </div>
+
+      <div className="container">
+
+        {movies.map((element) => {
+          return (
+            <div className='movie'>
+              <div>
+                <p>{element.Year}</p>
+              </div>
+              <div>
+                <img src={element.Poster} />
+              </div>
+              <div>
+                <span>{element.Type}</span>
+                <h3>{element.Title}</h3>
+              </div>
+            </div>
+          );
+        })
+
+
+
+
+        }
+
+      </div>
     </div>
   );
 }
