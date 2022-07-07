@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import searchIcon from "./assests/icon.svg"
+import Card from "./component/card/Card";
 
 
 
@@ -36,20 +37,9 @@ function App() {
 
       <div className="container">
 
-        {movies.map((element) => {
+        {movies.map((el) => {
           return (
-            <div className='movie'>
-              <div>
-                <p>{element.Year}</p>
-              </div>
-              <div>
-                <img src={element.Poster} />
-              </div>
-              <div>
-                <span>{element.Type}</span>
-                <h3>{element.Title}</h3>
-              </div>
-            </div>
+            < Card element={el}/>
           );
         })
 
